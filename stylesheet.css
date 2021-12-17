@@ -1,14 +1,13 @@
 .calculator {
   text-align: center;
   margin: 0 auto;
-  padding-top: 200px;
+  padding: 200px;
   width: 400px;
 }
 
 .calculator-screen {
   width: 100%;
   height: 100px;
-  /* background-color: #252525; */
   background-color: white;
   /* color: #fff; */
   text-align: right;
@@ -29,7 +28,6 @@
 
 button {
   height: 80px;
-  /* backgrournd-color: gray; */
   background-color: white;
   border: 1px solid rgb(224, 224, 224);
   font-size: 32px;
@@ -38,36 +36,23 @@ button {
   outline: none;
 }
 
-button:hover {
-  background-color: whitesmoke;
-  cursor: pointer;
-}
-
 .all-clear,
 .zero-btn {
   width: 50%;
 }
 
 .operator,
-.all-clear,
-.percentage {
+.equal-sign {
   background-color: white;
   color: rgb(236, 55, 167);
 }
 
+button:hover {
+  background-color: rgb(236, 55, 167);
+}
+
 .operator:hover,
-.all-clear:hover,
-.percentage:hover {
-  background-color: rgb(236, 55, 167);
-  color: white;
-  cursor: pointer;
-}
-
-.equal-sign {
-  background-color: rgb(236, 55, 167);
-  color: white;
-}
-
 .equal-sign:hover {
   background-color: rgb(236, 55, 167);
+  color: white;
 }
