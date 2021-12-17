@@ -1,113 +1,141 @@
-const calculatorScreen = document.querySelector(".calculator-screen");
+//1. Data input dari element HTML
+
+const calculatorScreen = document.querySelector('.calculator-screen')
 
 const updateScreen = (number) => {
-    calculatorScreen.value = number;
-};
+    calculatorScreen.value = number
+}
 
-const numbers = document.querySelectorAll(".number");
-// console.log(numbers);
+// const numbers= document.querySelectorAll(".number")
 
 // numbers.forEach((number) => {
 //     number.addEventListener("click", (event) => {
-//         updateScreen(event.target.value);
-//     });
-// });
+//         updateScreen(event.target.value)
+//     })
+// })
 
-// defenisikan variable untuk kalkulasi
-let prevNumber = "";
-let calculationOpertator = "";
-let currentNumber = "";
 
-// memberikan Number yg diklik ke variable currentNumber
+//2. Menyimpan angka dan operator untuk kalkulasi
+
+//definisi angka dan operator
+let prevNumber= ''
+let calculationOperator = ''
+let currentNumber = '0'
+
+//memberikan number yang di klik ke currentNumber
 const inputNumber = (number) => {
-    if (currentNumber === "0") {
-        currentNumber = number;
-    } else {
-        currentNumber += number;
+    if (currentNumber === '0') {
+        currentNumber = number
+    }else{
+        //bisa menampilkan lebih dari 1 string angka dengan penambahan + pada screen
+        currentNumber += number
     }
-};
+}
 
+const numbers= document.querySelectorAll(".number")
 numbers.forEach((number) => {
     number.addEventListener("click", (event) => {
-        inputNumber(event.target.value);
-        updateScreen(currentNumber);
-    });
-});
+        inputNumber(event.target.value)
+        updateScreen(currentNumber)
+    })
+})
 
-// click event operator
-const operators = document.querySelectorAll(".operator");
 
-operators.forEach((operator) => {
-    operator.addEventListener("click", (event) => {
-        inputOperator(event.target.value);
-    });
-});
+//definisikan function inputOperator
+// const inputOperator = (operator) => {
+//     prevNumber = currentNumber
+//     calculationOperator = operator
+//     currentNumber = ''
+// }
 
 // defenisikan function operator
 const inputOperator = (operator) => {
-    if (calculationOpertator === '') {
+    if (calculationOperator === '') {
         prevNumber = currentNumber;
     }
-    calculationOpertator = operator;
+    calculationOperator = operator;
     currentNumber = '0';
 };
 
-// menambahkan click event ke tombol =
-const equalSign = document.querySelector(".equal-sign");
+//jalankan function inputOperator saat Operator diklik
+const operators= document.querySelectorAll(".operator")
 
-equalSign.addEventListener("click", () => {
-    calculate();
-    updateScreen(currentNumber);
-});
+operators.forEach((operator) => {
+    operator.addEventListener("click", (event) => {
+        inputOperator(event.target.value)
+    })
+})
 
-// function calculation
+//3. mengaktifkan fungsi kalkulasi
+
+//menambahkan click event pada '='
+const equalSign = document.querySelector('.equal-sign')
+
+equalSign.addEventListener('click', () => {
+    //jalankan function calculate ketik '=' diklik
+    calculate()
+    updateScreen(currentNumber)
+})
+
+//Definisikan function calculate
 const calculate = () => {
-    let result = "";
-    switch (calculationOpertator) {
+    let result = ''
+    switch(calculationOperator) {
         case "+":
-            result = parseFloat(prevNumber) + parseFloat(currentNumber);
-            break;
+            //mengubah tipe data penambahan jadi float agar tidak digabungkan string
+            result= parseFloat(prevNumber) + parseFloat(currentNumber)
+            break
         case "-":
-            result = prevNumber - currentNumber;
-            break;
+            result= prevNumber - currentNumber
+            break
         case "*":
-            result = prevNumber * currentNumber;
-            break;
+            result= prevNumber * currentNumber
+            break
         case "/":
-            result = prevNumber / currentNumber;
-            break;
+            result= prevNumber / currentNumber
+            break
         default:
-            break;
+            return
     }
-    currentNumber = result;
-    calculationOpertator = "";
-};
+    //simpan hasil kalkulasi ke curruntNumber
+    currentNumber = result
+    calculationOperator = ''
+}
 
-// mengaktifkan tombol AC
-const clearBtn = document.querySelector(".all-clear");
+//Membuat tombol AC berjalan
 
-clearBtn.addEventListener("click", () => {
-    clearAll();
-    updateScreen(currentNumber);
-});
+//function clearAll
+const clearAll = (operator) => {
+    prevNumber = ''
+    calculationOperator = ''
+    currentNumber = '0'
+}
+const clearBtn = document.querySelector('.all-clear')
 
-const clearAll = () => {
-    prevNumber = "";
-    calculationOpertator = "";
-    currentNumber = "0";
-};
+//aktifkan tombol click AC
+clearBtn.addEventListener('click', () => {
+    //jalankan function calculate ketik '=' diklik
+    clearAll()
+    updateScreen(currentNumber)
+})
 
-// kalkulasi angka desimal
-const decimal = document.querySelector(".decimal");
+//kalkulsi Angka desimal
 
+const decimal = document.querySelector('.decimal')
+
+//function decimal
 inputDecimal = (dot) => {
-    if (currentNumber.includes('.')) {
-        return;
+    if(currentNumber.includes('.')) {
+        return
     }
-    currentNumber += dot;
-};
+    currentNumber += dot
+}
 
-decimal.addEventListener("click", (event) => {
-    inputDecimal(event.target.value);
-    updateScreen(currentNumber);
-});
+
+
+//aktifkan tombol click AC
+decimal.addEventListener('click', (event) => {
+    //jalankan function calculate ketik '=' diklik
+    inputDecimal(event.target.value)
+    updateScreen(currentNumber)
+})
